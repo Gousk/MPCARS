@@ -9,8 +9,6 @@ public class SpawnPlayers : MonoBehaviour
     public GameObject player2Prefab;
     public Transform playerSpawn1;
     public Transform playerSpawn2;
-    GameObject player1;
-    GameObject player2;
 
     private void Start() 
     {
@@ -19,13 +17,15 @@ public class SpawnPlayers : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            player1 = PhotonNetwork.Instantiate(player1Prefab.name, spawnPos1, Quaternion.identity) as GameObject;
-            player1.GetComponent<Movement>().enabled = false;
+            GameObject player1 = PhotonNetwork.Instantiate(player1Prefab.name, spawnPos1, Quaternion.identity);
+            player1.GetComponent<CarController>().enabled = false;
+            player1.transform.Rotate(0, 90, 0);
         }
         else
         {
-            player2 = PhotonNetwork.Instantiate(player2Prefab.name, spawnPos2, Quaternion.identity) as GameObject;
-            player2.GetComponent<Movement>().enabled = false;
+            GameObject player2 = PhotonNetwork.Instantiate(player2Prefab.name, spawnPos2, Quaternion.identity);
+            player2.GetComponent<CarController>().enabled = false;
+            player2.transform.Rotate(0, -90, 0);
         }         
     }
 }

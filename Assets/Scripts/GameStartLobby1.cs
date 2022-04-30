@@ -57,10 +57,10 @@ public class GameStartLobby1 : MonoBehaviour
 
     void StartGame()
     {
-        Player1 = GameObject.FindGameObjectWithTag("Player1");
-        Player2 = GameObject.FindGameObjectWithTag("Player2");
-        Player1.GetComponent<Movement>().enabled = true;
-        Player2.GetComponent<Movement>().enabled = true;
+        Player1 = GameObject.FindGameObjectWithTag("Fire");
+        Player2 = GameObject.FindGameObjectWithTag("Car");
+        Player1.GetComponent<CarController>().enabled = true;
+        Player2.GetComponent<CarController>().enabled = true;
         canvas.enabled = false;  
     }
 }

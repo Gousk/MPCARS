@@ -18,14 +18,16 @@ namespace Photon.Pun.UtilityScripts
     /// <summary>
     /// Smoothed out movement for network gameobjects
     /// </summary>
+    
     [RequireComponent(typeof(PhotonView))]
     public class SmoothSyncMovement : Photon.Pun.MonoBehaviourPun, IPunObservable
     {
+        public PhotonView view;
         public float SmoothingDelay = 5;
         public void Awake()
         {
             bool observed = false;
-            foreach (Component observedComponent in this.photonView.ObservedComponents)
+            foreach (Component observedComponent in this.view.ObservedComponents)
             {
                 if (observedComponent == this)
                 {
@@ -60,7 +62,7 @@ namespace Photon.Pun.UtilityScripts
 
         public void Update()
         {
-            if (!photonView.IsMine)
+            if (!view.IsMine)
             {
                 //Update remote player (smooth this, this looks good, at the cost of some accuracy)
                 transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * this.SmoothingDelay);
